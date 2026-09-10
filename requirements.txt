@@ -1,0 +1,13 @@
+﻿# Бот «Перепочинок» (bot.py) — працює на СТАНДАРТНІЙ БІБЛІОТЕЦІ Python,
+# тому зовнішніх пакетів НІЯКИХ (pip install -r requirements.txt нічого не встановить).
+#
+# Використані модулі (усі — стандартні, вбудовані в Python):
+#   json, os, time, socket, ssl, http.client, urllib.request, urllib.parse, datetime
+#
+# Потреба: Python 3.8+ (перевірено на 3.13).
+#
+# Якщо все-таки хочеш запустити команду:
+#   python -m pip install -r requirements.txt
+# — воно пройде успішно без жодних завантажень.
+#
+# Єдиний випадок, коли може знадобитись pip — якщо на VPS Python старший за 3.8.
