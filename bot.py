@@ -269,6 +269,13 @@ def _http_keepalive():
 _http_keepalive()
 
 offset = 0
+try:
+    old = tg('getUpdates', offset=-1, timeout=10, limit=100)
+    if old:
+        offset = old[-1]['update_id'] + 1
+        print('старі апдейти пропущено: ' + str(len(old)))
+except Exception as e:
+    print('skip old updates: ' + str(e))
 print('Бот «Перепочинок» запущено (токен **/' + TOKEN[-4:] + ')')
 while True:
     try:
