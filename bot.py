@@ -1,4 +1,4 @@
-﻿import json, os, time, urllib.request
+import json, os, time, urllib.request
 from datetime import datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -25,15 +25,15 @@ def tg(method, **kw):
     return j['result']
 
 REGIONS = [
- ('Київ','kyiv'), ('Автоматична Республіка Крим','crimea'), ('Вінницька область','vinn'),
- ('Волинська область','volyn'), ('Дніпропетрівська область','dnip'), ('Донецька область','don'),
- ('Запорізька область','zapor'), ('Закарпатська область','zakarp'), ('Івано-Франківська область','ivan'),
- ('Кириловоградська область','kirov'), ('Київська область','kyivobl'), ('Луганська область','luh'),
- ('Львівська область','lviv'), ('Миколаївська область','nik'), ('Одеська область','odesa'),
- ('Полтавська область','poltava'), ('Рівненська область','rivne'), ('Сумська область','sumy'),
- ('Тернопільська область','tern'), ('Харківська область','kharkiv'), ('Херсонська область','kherson'),
- ('Хмельницька область','khmel'), ('Черкаська область','cherkasy'), ('Чернігівська область','chernih'),
- ('Чернівецька область','cherniv'), ('Севастополь','sevast'),
+ ('Київ','kyiv'), ('Крим','crimea'), ('Вінниця','vinn'),
+ ('Волинь','volyn'), ('Дніпро','dnip'), ('Донецьк','don'),
+ ('Запоріжжя','zapor'), ('Закарпаття','zakarp'), ('Івано-Франківськ','ivan'),
+ ('Кіровоград','kirov'), ('Київщина','kyivobl'), ('Луганськ','luh'),
+ ('Львів','lviv'), ('Миколаїв','nik'), ('Одеса','odesa'),
+ ('Полтава','poltava'), ('Рівне','rivne'), ('Суми','sumy'),
+ ('Тернопіль','tern'), ('Харків','kharkiv'), ('Херсон','kherson'),
+ ('Хмельницький','khmel'), ('Черкаси','cherkasy'), ('Чернігів','chernih'),
+ ('Чернівці','cherniv'), ('Севастополь','sevast'),
 ]
 ORGS = {
 'kyiv':[('«Безмежний світ»','розвиток і соціалізація дітей з особливими потребами: майстерні, походи, інклюзивні свята',['on-site','distance']),
@@ -187,8 +187,8 @@ def done(chat):
     lines += ['', 'Результат анонімний: для кадрників це просто ще одна точка «температури колективу».']
     tg('sendMessage', chat_id=chat, text='\n'.join(lines), parse_mode='HTML')
     tg('sendMessage', chat_id=chat, text='Наступний крок?',
-       reply_markup=kb([[{'text':'✅ Надіслати анонімно кадрникам','callback_data':'act:send'},
-                         {'text':'↻ Пройти ще раз','callback_data':'act:again'}]]))
+       reply_markup=kb([[{'text':'✅ Надіслати анонімно','callback_data':'act:send'}],
+                         [{'text':'↻ Пройти ще раз','callback_data':'act:again'}]]))
     S['step'] = 'result'
     S['last'] = (now.isoformat(), S['region'], stress, burnout, S['battery'], z)
 
