@@ -1,0 +1,9 @@
+﻿services:
+  - type: web
+    name: peremichonok
+    runtime: python
+    plan: free
+    buildCommand: ""
+    startCommand: python bot.py
+    healthCheckPath: /
+    autoDeploy: true
