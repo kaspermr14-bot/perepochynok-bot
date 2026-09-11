@@ -228,9 +228,12 @@ def on_message(chat, text):
     if t.startswith('/hr'):
         return hr_report(chat)
     S = state.get(chat)
-    if S and S.get('step') == 'battery' and t.isdigit() and 0 <= int(t) <= 100:
-        S['battery'] = int(t)
-        return nxt(chat)
+    digits = ''.join(ch for ch in t if ch.isdigit())
+    if S and S.get('step') == 'battery':
+        if digits and 0 <= int(digits) <= 100:
+            S['battery'] = int(digits)
+            return nxt(chat)
+        return tg('sendMessage', chat_id=chat, text='Надішліть просто цифру від 0 до 100 🙂')
     if S:
         tg('sendMessage', chat_id=chat, text='Оберіть відповідь кнопкою нижче 🙂')
 
@@ -239,6 +242,10 @@ def on_callback(q):
     data = q.get('data') or ''
     key, _, val = data.partition(':')
     tg('answerCallbackQuery', callback_query_id=q['id'])
+    try:
+        tg('editMessageReplyMarkup', chat_id=chat, message_id=q['message']['message_id'], reply_markup={'inline_keyboard': []})
+    except Exception:
+        pass
     S = state.get(chat)
     if not S:
         print('state empty, auto-restart, chat=' + str(chat))
