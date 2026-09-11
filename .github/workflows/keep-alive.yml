@@ -1,0 +1,16 @@
+   name: keep-alive
+   on:
+     schedule:
+       - cron: '*/10 * * * *'
+     workflow_dispatch: {}
+   jobs:
+     ping:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         - name: ping render
+           run: |
+             curl -sf https://perepochynok-bot-21.onrender.com || true
+             sleep 5
+             curl -sf https://perepochynok-bot-21.onrender.com || true
+   
